@@ -1,0 +1,44 @@
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 1px solid black;
+  padding: 20px 20px;
+}
+
+.label {
+  text-transform: capitalize;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.input {
+  display: block;
+  width: 480px;
+  height: 24px;
+  margin-top: 5px;
+  padding: 5px 15px;
+  font-size: 18px;
+}
+
+.input:hover,
+.input:focus {
+  outline: 1px solid lightgreen;
+}
+
+.btn {
+  width: 150px;
+  height: 40px;
+  font-size: 18px;
+  background-color: lightgreen;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: darkgreen;
+  color: bisque;
+}
