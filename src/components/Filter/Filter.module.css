@@ -1,23 +1,22 @@
-.label {
-  margin-bottom: 30px;
-  font-size: 23px;
-  font-weight: 400px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 0 20px;
-}
-
-.input {
-  display: block;
+.filterContainer {
   width: 480px;
-  height: 22px;
-  margin-top: 5px;
-  padding: 5px 15px;
-  font-size: 18px;
+  padding: 20px;
 }
 
-.input:hover,
-.input:focus {
-  outline: 1px solid lightgreen;
+.filterLabel {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.filterInput {
+  width: 460px;
+  font-size: 16px;
+  padding: 8px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.filterInput:hover,
+.filterInput:focus {
+  border: 1px solid blue;
 }

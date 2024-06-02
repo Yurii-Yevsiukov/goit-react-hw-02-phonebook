@@ -1,22 +1,27 @@
-import PropTypes from 'prop-types';
 import css from './Filter.module.css';
+import PropTypes from 'prop-types';
 
-export function Filter({ filter, hendleFilterChange }) {
+export const Filter = ({ filter, setFilter }) => {
+  const handleFilterChange = e => {
+    setFilter(e.target.value);
+  };
+
   return (
-    <label className={css.label}>
-      Find contacts by name
+    <div className={css.filterContainer}>
+      <p className={css.filterLabel}>Find Contacts by Name</p>
       <input
-        className={css.input}
-        input={filter}
+        className={css.filterInput}
         type="text"
         name="filter"
-        onChange={hendleFilterChange}
+        placeholder="Search by name"
+        value={filter}
+        onChange={handleFilterChange}
       />
-    </label>
+    </div>
   );
-}
+};
 
 Filter.propTypes = {
   filter: PropTypes.string.isRequired,
-  hendleFilterChange: PropTypes.func.isRequired,
+  setFilter: PropTypes.func.isRequired,
 };

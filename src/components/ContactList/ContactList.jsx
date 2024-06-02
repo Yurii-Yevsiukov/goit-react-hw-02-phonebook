@@ -1,34 +1,24 @@
+import { ContactListItem } from 'components/ContactListItem/ContactListItem';
 import PropTypes from 'prop-types';
 import css from './ContactList.module.css';
 
-export function ContactList({ contacts, deleteContact }) {
+export const ContactList = ({ filterContact, deleteContact }) => {
+  const filteredContacts = filterContact();
+
   return (
-    <ul className={css.contacts__list}>
-      {contacts.map(({ id, name, number }) => {
-        return (
-          <li className={css.contacts__item} key={id}>
-            {name}: <span className={css.contacts__span}>{number}</span>
-            <button
-              className={css.contacts__btn}
-              type="button"
-              onClick={() => deleteContact(name)}
-            >
-              Delete
-            </button>
-          </li>
-        );
-      })}
+    <ul className={css.contactList}>
+      {filteredContacts.map(filteredContact => (
+        <ContactListItem
+          key={filteredContact.id}
+          filteredContact={filteredContact}
+          deleteContact={deleteContact}
+        />
+      ))}
     </ul>
   );
-}
+};
 
 ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
+  filterContact: PropTypes.func.isRequired,
   deleteContact: PropTypes.func.isRequired,
 };

@@ -15,59 +15,43 @@ export class App extends Component {
     filter: '',
   };
 
-  handleInputChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+  addContact = newContact => {
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, newContact],
+    }));
   };
 
-  addContact = (name, number, id) => {
-    if (
-      this.state.contacts.find(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
-      )
-    ) {
-      alert(`${name} is already in contacts.`);
-      return;
-    }
+  deleteContact = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
+  };
 
-    this.setState(prevState => {
-      return {
-        contacts: [...prevState.contacts, { name, number, id }],
-      };
+  setFilter = filterValue => {
+    this.setState({
+      filter: filterValue,
     });
   };
 
-  filterContacts = () => {
-    return this.state.contacts.filter(contact => {
-      return contact.name
-        .toLowerCase()
-        .includes(this.state.filter.toLowerCase());
-    });
-  };
-
-  deleteContact = name => {
-    const contacts = this.state.contacts.filter(contact => {
-      return contact.name.toLowerCase() !== name.toLowerCase();
-    });
-
-    this.setState(() => {
-      return {
-        contacts: [...contacts],
-      };
-    });
+  filterContact = () => {
+    const { contacts, filter } = this.state;
+    const filterLowerCase = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filterLowerCase)
+    );
   };
 
   render() {
+    const { contacts, filter } = this.state;
     return (
       <div className={css.container}>
-        <h1 className={css.title}>Phonebook</h1>
-        <ContactForm addContact={this.addContact} />
-        <h2 className={css.title}>Contacts</h2>
-        <Filter
-          filter={this.state.filter}
-          hendleFilterChange={this.handleInputChange}
-        />
+        <h1>Phonebook</h1>
+        <ContactForm addContact={this.addContact} contacts={contacts} />
+
+        <h2>Contacts</h2>
+        <Filter filter={filter} setFilter={this.setFilter} />
         <ContactList
-          contacts={this.filterContacts()}
+          filterContact={this.filterContact}
           deleteContact={this.deleteContact}
         />
       </div>
